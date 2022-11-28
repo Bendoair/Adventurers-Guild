@@ -18,6 +18,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -91,6 +94,10 @@ public class Visual{
 	
 	
 	
+	/**
+	 * @author bened
+	 * Button that Accepts a quest from the quest board
+	 */
 	private class QuestAcceptButtonActionListener implements ActionListener, Serializable{
 
 		/**
@@ -115,6 +122,10 @@ public class Visual{
 		
 	}
 	
+	/**
+	 * @author bened
+	 * Button that hires a Hero from the Hero board
+	 */
 	private class HeroHireButtonActionListener implements ActionListener, Serializable{
 
 		/**
@@ -133,6 +144,10 @@ public class Visual{
 	}
 	
 	
+	/**
+	 * @author bened
+	 * Button that levels up  a hero 
+	 */
 	private class HeroLevelButtonActionListener implements ActionListener, Serializable{
 
 		/**
@@ -154,6 +169,10 @@ public class Visual{
 		
 	}
 	
+	/**
+	 * @author bened
+	 * A button that assigns a hero to a quest
+	 */
 	private class HeroAssignButtonActionListener implements ActionListener, Serializable{
 
 		/**
@@ -236,6 +255,14 @@ public class Visual{
 		MainFrame.add(exitbutton);
 		
 		
+		//Menu bar that is needed but unnecessary
+		JMenuBar kell = new JMenuBar();
+		JMenu menu = new JMenu("Menu");
+		JMenuItem help = new JMenuItem("Help");
+		menu.add(help);
+		kell.add(menu);
+		ViewF.setJMenuBar(kell);
+		help.addActionListener(e -> help());
 		
 		
 
@@ -280,8 +307,7 @@ public class Visual{
 		cl.show(panel_cont, "Questboard");
 		
 		setUpHeroView();
-		
-		ViewF.add(MainFrame, BorderLayout.NORTH);
+		ViewF.add(MainFrame, BorderLayout.PAGE_START);
 		ViewF.add(panel_cont, BorderLayout.CENTER);
 		ViewF.setVisible(true);
 	}
@@ -350,7 +376,22 @@ public class Visual{
 		timer.schedule(toDoTick, 0, 1000);
 	}
 	
-	
+	public void help() {
+		JFrame helpframe = new JFrame("Help");
+		JTextArea info = new JTextArea();
+		info.setEditable(false);
+		info.setBackground(Color.pink);
+		info.setText("Use the mouse to click on the GUI.\n"
+				+ "You can switch between views using the little box near the save button!\n"
+				+ "Quest Panel: Accept quests, but be vary of their deadline!\n"
+				+ "Hero Panel: Hire Heroes or upgrade existing ones!\n"
+				+ "Assign Panel: Assign Heroes to quests. Type in the name of the Hero and click assign!");
+		helpframe.add(info);
+		
+		helpframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		helpframe.pack();
+		helpframe.setVisible(true);
+	}
 	
 	
 	/**
